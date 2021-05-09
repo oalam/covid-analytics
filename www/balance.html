@@ -1,112 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <script src="js/lib/echarts.min.js"></script>
-    <script src="js/lib/jquery-3.2.1.min.js"></script>
-</head>
-<body>
-<!-- Prepare a DOM for Echarts, with a fixed size. -->
-<form>
+    <head>
+        <meta charset="utf-8">
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
-    <div>
-        <label>Sexe :</label>
-        <input type="radio" id="sexeChoice1" name="sexe" value="f" checked="checked">
-        <label for="sexeChoice1">femme</label>
-
-        <input type="radio" id="sexeChoice2" name="sexe" value="h">
-        <label for="sexeChoice2">homme</label>
-    </div>
-    <div>
-        <label for="commobibity">Comorbidité :</label>
-
-
-        <select name="commobibity" id="commobibity"></select>
-        <script>
-
-        html = "";
-
-        obj = {
-            "Aucun": "1",
-            "Obésité": "1.63",
-            "Diabète": "1.64",
-            "Insuffisance cardiaque": "1.44",
-            "AVC": "1.33",
-            "Maladies respiratoires chroniques": "1.56",
-            "Mucoviscidose": "3.74",
-            "Embolie pulmonaire": "1.44",
-            "Cancers actifs": "1.5",
-            "Cancer du poumon actif": "2.6",
-            "Polyarthrite rhumatoïde": "1.48",
-            "Trisomie 21": "7.03",
-            "Recours aux neuroleptiques":"1.61",
-            "Epilepsie": "1.52",
-            "Sclerose en plaque": "1.74",
-            "Paraplégie": "1.95",
-            "Myopathie": "1.37",
-            "Parkinson": "1.52",
-            "Démence": "2.04",
-            "Retard mental": "3.83",
-            "Hémophilie": "1.47",
-            "VIH": "1.88",
-            "Maladies du foie": "1.5",
-            "Insuffisance rénale chronique terminale": "4.16",
-            "Transplantation rénale": "4.55",
-            "Transplantation cardiaque": "2.15",
-            "Transplantation du poumon": "3.53"
-        }
-        var i =0;
-        for(var key in obj) {
-            html += "<option value=" +  obj[key] + ">" + key + "</option>"
-        }
-        document.getElementById("commobibity").innerHTML = html;
+        <script src="js/lib/jquery-3.2.1.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/balance.css">
+    </head>
+    <body>
+    <!-- Prepare a DOM for Echarts, with a fixed size. -->
+        <div class="container">
+            <form action="" class="m-auto" style="max-width:600px">
+                <h3 class="my-4">Balance bénéfices/risques :</h3>
+                <hr class="my-4" />
+                <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Sexe :</label>
+                    <div class="col-md-7">
+                        <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input" type="radio" name="sexe" id="sexe_1" checked value="f"><label class="form-check-label custom-control-label" for="sexe_1">femme</label></div>
+                        <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input" type="radio" name="sexe" id="sexe_2" value="h"><label class="form-check-label custom-control-label" for="sexe_2">homme</label></div>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row"><label for="cl_age90" class="col-md-5 col-form-label">Tranche d'âge :</label>
+                    <div class="col-md-7" id="select_cl_age90">
+                        <select class="form-select custom-select custom-select-lg" id="cl_age90"></select>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row"><label for="commobibity" class="col-md-5 col-form-label">Comorbidité :</label>
+                    <div class="col-md-7">
+                        <select class="form-select custom-select custom-select-lg" id="commobibity"></select>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row" id="select_region"><label for="region" class="col-md-5 col-form-label">Région :</label>
+                    <div class="col-md-7">
+                        <select class="form-select custom-select custom-select-lg" id="region"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
 
 
-        </script>
-    </div>
-    <div>
-        <label for="region">Région :</label>
+        <div id="main" style="width: 800px;height:600px;" class="container"></div>
 
-
-        <select name="region" id="region"></select>
-        <script>
-
-        html = "";
-
-        obj = {
-            "1": "Guadeloupe",
-            "2": "Martinique",
-            "3": "Guyane",
-            "4": "La Réunion",
-            "6": "Mayotte",
-            "11": "Île-de-France",
-            "24": "Centre-Val de Loire",
-            "27": "Bourgogne-Franche-Comté",
-            "28": "Normandie",
-            "32": "Hauts-de-France",
-            "44": "Grand Est",
-            "52": "Pays de la Loire",
-            "53": "Bretagne",
-            "75": "Nouvelle-Aquitaine",
-            "76": "Occitanie",
-            "84": "Auvergne-Rhône-Alpes",
-            "93": "Provence-Alpes-Côte d'Azur",
-            "94": "Corse"
-        }
-        var i =0;
-        for(var key in obj) {
-            html += "<option value=" + key  + ">" + obj[key] + "</option>"
-        }
-        document.getElementById("region").innerHTML = html;
-
-
-        </script>
-    </div>
-</form>
-<div id="main" style="width: 600px;height:400px;"></div>
-
-<!-- Here we go, with our customized echarts file.  -->
-<!-- It is IMPORTANT to put this file here, instead of putting in the header.  -->
-<script src="js/balance.js"></script>
-</body>
+        <!-- Here we go, with our customized echarts file.  -->
+        <!-- It is IMPORTANT to put this file here, instead of putting in the header.  -->
+        <script src="js/balance.js"></script>
+    </body>
 </html>
