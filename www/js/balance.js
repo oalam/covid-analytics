@@ -28,6 +28,7 @@ document.getElementById("region").innerHTML = html;
 $("#select_region select").val("11");
 $('#region').change(function(){
     region = $(this).val();
+    updateBalance()
 })
 
 
@@ -50,6 +51,7 @@ document.getElementById("cl_age90").innerHTML = html;
 $("#select_cl_age90 select").val("49");
 $('#cl_age90').change(function(){
     cl_age90 = $(this).val();
+    updateBalance()
 })
 
 
@@ -92,8 +94,7 @@ document.getElementById("commobibity").innerHTML = html;
 
 $('#commobibity').change(function(){
     commobibity = $(this).val()
-    option.series[0].data[0].value = commobibity * 10;
-    myChart.setOption(option, true);
+    updateBalance()
 })
 
 
@@ -101,22 +102,61 @@ $("#sexe select").val("f");
 $('input[name=sexe]').change(function(){
     var value = $( 'input[name=sexe]:checked' ).val();
     sexe = value;
+    updateBalance()
 });
 
+$('input[name=boost]').change(function(){
+    var value = $( 'input[name=boost]:checked' ).val();
+    boost = value;
+    updateBalance()
+});
 
+var astrazeneca_risk = {
+    29: 5.8,
+    39: 4.6,
+    49: 5.8,
+    59: 3.2,
+    69: 3,
+    79: 2.2,
+    89: 1.2
+}
 
+incidence_boost = {
+    'high': 1.5,
+    'medium': 1,
+    'low': 0.5
+}
 
 /**
   *
   *  Charting options
   *
   */
+var boost = 'medium';
 var sexe = 'f';
 var cl_age90 = 49;
 var commobibity = 1;
 var region = 11;
+var csvData = [];
 
 
+function updateBalance() {
+
+
+   for (let i = 1; i < csvData.length; i++) {
+
+        if( csvData[i][0] == region && csvData[i][1] == cl_age90 ){
+            if(sexe == 'f')
+                option.series[0].data[0].value = incidence_boost[boost] * commobibity * csvData[i][3] - astrazeneca_risk[cl_age90];
+            else
+                option.series[0].data[0].value = incidence_boost[boost] *  commobibity * csvData[i][2] - astrazeneca_risk[cl_age90];
+            break;
+        }
+   }
+
+
+    myChart.setOption(option, true);
+}
 
 // Initialize echart object, based on the prepared DOM.
 var myChart = echarts.init(document.getElementById('main'));
@@ -127,16 +167,16 @@ var option = {
         type: 'gauge',
         startAngle: 180,
         endAngle: 0,
-        min: 0,
-        max: 1,
+        min: -65,
+        max: 65,
         splitNumber: 5,
         axisLine: {
             lineStyle: {
                 width: 6,
                 color: [
-                    [0.4, '#58D9F9'],
-                    [0.6, '#7CFFB2' ],
-                    [1, '#FF6E76']
+                    [0.4, '#FF6E76'],
+                    [0.6,  '#58D9F9'],
+                    [1,'#7CFFB2' ]
                 ]
             }
         },
@@ -187,7 +227,7 @@ var option = {
             offsetCenter: [0, '0%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value * 100);
+                return Math.round(value);
             },
             color: 'auto'
         },
@@ -198,11 +238,10 @@ var option = {
     }]
 };
 
-fetch("https://raw.githubusercontent.com/oalam/covid-analytics/main/data/incidence_rea_reg_cl_age-2021-05-14.csv") // L'url du service REST
+fetch("https://raw.githubusercontent.com/oalam/covid-analytics/main/data/balance_astrazeneca-2021-05-14.csv") // L'url du service REST
     .then(response => response.text())
     .then(data => {
-        // create empty array
-        const csvData = [];
+
 
         // this will return each line as an individual String
         const lines = data.split("\n");
@@ -210,16 +249,7 @@ fetch("https://raw.githubusercontent.com/oalam/covid-analytics/main/data/inciden
         for (let i = 0; i < lines.length; i++) {
             csvData[i] = lines[i].split(",");
         }
-        console.log(csvData);
-       /* let option = {
-            series: [
-                {
-                    type: 'line',
-                    data: r.values, // on lit un bout du JSON, là
-                },
-            ]
-        };
-        myChart.setOption(option);*/
+        updateBalance();
     });
 
 // Render the chart on page, using the former data and options.
