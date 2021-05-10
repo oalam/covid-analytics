@@ -24,10 +24,7 @@ age_factors = {
 
 
 # Efficacité vis-à-vis des décès
-astrazemeca_efficacity = {
-    '0': math.nan,
-    '9': math.nan,
-    '19': 0.76,
+astrazeneca_efficacity = {
     '29': 0.76,
     '39': 0.76,
     '49': 0.76,
@@ -39,18 +36,14 @@ astrazemeca_efficacity = {
 }
 
 # TTS sous notification EMA 2 doses + anaphylaxie)
-astrazemeca_risk = {
-    '0': math.nan,
-    '9': math.nan,
-    '19': math.nan,
+astrazeneca_risk = {
     '29': 5.8,
     '39': 4.6,
     '49': 5.8,
     '59': 3.2,
     '69': 3,
     '79': 2.2,
-    '89': 1.2,
-    '90': math.nan
+    '89': 1.2
 }
 
 incidence_boost = {

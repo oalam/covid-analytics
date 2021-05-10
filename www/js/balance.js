@@ -34,16 +34,13 @@ $('#region').change(function(){
 // setup cl age
 html = "";
 obj = {
-    "9": "0-9 ans",
-    "19": "10-19 ans",
     "29": "20-29 ans",
     "39": "30-39 ans",
     "49": "40-49 ans",
     "59": "50-59 ans",
     "69": "60-69 ans",
     "79": "70- 79 ans",
-    "89": "80-89 ans",
-    "90": "90 ans et plus",
+    "89": "80-89 ans"
 }
 var i =0;
 for(var key in obj) {

@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
-        <script src="js/lib/jquery-3.2.1.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/balance.css">
-    </head>
-    <body>
-    <!-- Prepare a DOM for Echarts, with a fixed size. -->
-        <div class="container">
-            <form action="" class="m-auto" style="max-width:600px">
-                <h3 class="my-4">Balance bénéfices/risques :</h3>
-                <hr class="my-4" />
-                <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Sexe :</label>
-                    <div class="col-md-7">
-                        <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input" type="radio" name="sexe" id="sexe_1" checked value="f"><label class="form-check-label custom-control-label" for="sexe_1">femme</label></div>
-                        <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input" type="radio" name="sexe" id="sexe_2" value="h"><label class="form-check-label custom-control-label" for="sexe_2">homme</label></div>
-                    </div>
-                </div>
-                <div class="form-group mb-3 row"><label for="cl_age90" class="col-md-5 col-form-label">Tranche d'âge :</label>
-                    <div class="col-md-7" id="select_cl_age90">
-                        <select class="form-select custom-select custom-select-lg" id="cl_age90"></select>
-                    </div>
-                </div>
-                <div class="form-group mb-3 row"><label for="commobibity" class="col-md-5 col-form-label">Comorbidité :</label>
-                    <div class="col-md-7">
-                        <select class="form-select custom-select custom-select-lg" id="commobibity"></select>
-                    </div>
-                </div>
-                <div class="form-group mb-3 row" id="select_region"><label for="region" class="col-md-5 col-form-label">Région :</label>
-                    <div class="col-md-7">
-                        <select class="form-select custom-select custom-select-lg" id="region"></select>
-                    </div>
-                </div>
-            </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/balance.css">
+</head>
+<body>
+<!-- Prepare a DOM for Echarts, with a fixed size. -->
+<div class="container">
+    <form action="" class="m-auto" style="max-width:600px">
+        <hr class="my-4"/>
+        <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Sexe :</label>
+            <div class="col-md-7">
+                <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input"
+                                                                           type="radio" name="sexe" id="sexe_1" checked
+                                                                           value="f"><label
+                        class="form-check-label custom-control-label" for="sexe_1">femme</label></div>
+                <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input"
+                                                                           type="radio" name="sexe" id="sexe_2"
+                                                                           value="h"><label
+                        class="form-check-label custom-control-label" for="sexe_2">homme</label></div>
+            </div>
         </div>
+        <div class="form-group mb-3 row"><label for="cl_age90" class="col-md-5 col-form-label">Tranche d'âge :</label>
+            <div class="col-md-7" id="select_cl_age90">
+                <select class="form-select custom-select custom-select-lg" id="cl_age90"></select>
+            </div>
+        </div>
+        <div class="form-group mb-3 row"><label for="commobibity" class="col-md-5 col-form-label">Comorbidité :</label>
+            <div class="col-md-7">
+                <select class="form-select custom-select custom-select-lg" id="commobibity"></select>
+            </div>
+        </div>
+        <div class="form-group mb-3 row" id="select_region"><label for="region" class="col-md-5 col-form-label">Région
+            :</label>
+            <div class="col-md-7">
+                <select class="form-select custom-select custom-select-lg" id="region"></select>
+            </div>
+        </div>
+        <div class="form-group mb-3 row" id="select_vaccin"><label for="vaccin" class="col-md-5 col-form-label">Type de vaccin
+            :</label>
+            <div class="col-md-7">
+                <select class="form-select custom-select custom-select-lg" id="vaccin">
+                    <option value="astrazeneca">Astrazeneca</option>
+                    <option value="arn">Arn messager</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
 
 
-        <div id="main" style="width: 800px;height:600px;" class="container"></div>
+<div id="main" style="width: 800px;height:600px;" class="container"></div>
 
-        <!-- Here we go, with our customized echarts file.  -->
-        <!-- It is IMPORTANT to put this file here, instead of putting in the header.  -->
-        <script src="js/balance.js"></script>
-    </body>
+<!-- Here we go, with our customized echarts file.  -->
+<!-- It is IMPORTANT to put this file here, instead of putting in the header.  -->
+<script src="js/balance.js"></script>
+</body>
 </html>
