@@ -163,20 +163,21 @@ function updateBalance() {
         if( csvData[i][0] == region && csvData[i][1] == cl_age90 ){
             if(sexe == 'f'){
                 if(vaccin == 'astrazeneca'){
-                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] - astrazeneca_risk[cl_age90];
+                        console.log( 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] ) ;
+                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] / astrazeneca_risk[cl_age90];
                 }else{
-                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] * commobibity * csvData[i][3] - 1;
+                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] * commobibity * csvData[i][3] / 0.4;
                 }
             }
 
             else{
                  if(vaccin == 'astrazeneca'){
-                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] *  commobibity * csvData[i][2] - astrazeneca_risk[cl_age90];
+                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] *  commobibity * csvData[i][2] / astrazeneca_risk[cl_age90];
                  }else{
-                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] *  commobibity * csvData[i][2] - 1;
+                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] *  commobibity * csvData[i][2] / 0.4;
                  }
             }
-
+            console.log(option.series[0].data[0].value);
             break;
         }
    }
@@ -194,15 +195,15 @@ var option = {
         type: 'gauge',
         startAngle: 180,
         endAngle: 0,
-        min: -65,
-        max: 65,
+        min: 0,
+        max: 4,
         splitNumber: 8,
         axisLine: {
             lineStyle: {
                 width: 6,
                 color: [
-                    [0.47, '#FF6E76'],
-                    [0.53,  '#58D9F9'],
+                    [0.25, '#FF6E76'],
+                    [0.50,  '#58D9F9'],
                     [1,'#7CFFB2' ]
                 ]
             }
@@ -246,7 +247,7 @@ var option = {
             }
         },
         title: {
-            offsetCenter: [0, '-10%'],
+            offsetCenter: [0, '-20%'],
             fontSize: 30
         },
         detail: {
@@ -254,10 +255,10 @@ var option = {
             offsetCenter: [0, '0%'],
             valueAnimation: true,
             formatter: function (value) {
-                return Math.round(value);
+                return value.toFixed(2);
             },
             color: 'auto',
-            show: false
+            show: true
         },
         data: [{
             value: 0.70,
