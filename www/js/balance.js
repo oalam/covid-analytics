@@ -111,6 +111,13 @@ $('input[name=boost]').change(function(){
     updateBalance()
 });
 
+$('input[name=vaccin]').change(function(){
+    var value = $( 'input[name=vaccin]:checked' ).val();
+    vaccin = value;
+    updateBalance()
+});
+
+
 var astrazeneca_risk = {
     29: 5.8,
     39: 4.6,
@@ -127,6 +134,11 @@ incidence_boost = {
     'low': 0.5
 }
 
+vaccine_efficacity = {
+    'astrazeneca' : 0.76,
+    'arn': 0.95
+}
+
 /**
   *
   *  Charting options
@@ -138,6 +150,7 @@ var cl_age90 = 49;
 var commobibity = 1;
 var region = 11;
 var csvData = [];
+var vaccin = 'astrazeneca'
 
 
 function updateBalance() {
@@ -169,13 +182,13 @@ var option = {
         endAngle: 0,
         min: -65,
         max: 65,
-        splitNumber: 5,
+        splitNumber: 8,
         axisLine: {
             lineStyle: {
                 width: 6,
                 color: [
-                    [0.4, '#FF6E76'],
-                    [0.6,  '#58D9F9'],
+                    [0.47, '#FF6E76'],
+                    [0.53,  '#58D9F9'],
                     [1,'#7CFFB2' ]
                 ]
             }
@@ -219,7 +232,7 @@ var option = {
             }
         },
         title: {
-            offsetCenter: [0, '-20%'],
+            offsetCenter: [0, '-10%'],
             fontSize: 30
         },
         detail: {
@@ -229,11 +242,12 @@ var option = {
             formatter: function (value) {
                 return Math.round(value);
             },
-            color: 'auto'
+            color: 'auto',
+            show: false
         },
         data: [{
             value: 0.70,
-            name: 'Bénéfice / Risque'
+            name: 'Risque / Bénéfice'
         }]
     }]
 };
