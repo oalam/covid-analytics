@@ -111,8 +111,8 @@ $('input[name=boost]').change(function(){
     updateBalance()
 });
 
-$('input[name=vaccin]').change(function(){
-    var value = $( 'input[name=vaccin]:checked' ).val();
+$('#vaccin').change(function(){
+    var value = $(this).val()
     vaccin = value;
     updateBalance()
 });
@@ -127,6 +127,8 @@ var astrazeneca_risk = {
     79: 2.2,
     89: 1.2
 }
+
+var arn_risk = 1.0
 
 incidence_boost = {
     'high': 1.5,
@@ -159,10 +161,22 @@ function updateBalance() {
    for (let i = 1; i < csvData.length; i++) {
 
         if( csvData[i][0] == region && csvData[i][1] == cl_age90 ){
-            if(sexe == 'f')
-                option.series[0].data[0].value = incidence_boost[boost] * commobibity * csvData[i][3] - astrazeneca_risk[cl_age90];
-            else
-                option.series[0].data[0].value = incidence_boost[boost] *  commobibity * csvData[i][2] - astrazeneca_risk[cl_age90];
+            if(sexe == 'f'){
+                if(vaccin == 'astrazeneca'){
+                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] - astrazeneca_risk[cl_age90];
+                }else{
+                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] * commobibity * csvData[i][3] - 1;
+                }
+            }
+
+            else{
+                 if(vaccin == 'astrazeneca'){
+                    option.series[0].data[0].value = 0.76 * incidence_boost[boost] *  commobibity * csvData[i][2] - astrazeneca_risk[cl_age90];
+                 }else{
+                    option.series[0].data[0].value = 0.95 * incidence_boost[boost] *  commobibity * csvData[i][2] - 1;
+                 }
+            }
+
             break;
         }
    }
