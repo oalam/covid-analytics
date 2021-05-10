@@ -7,7 +7,7 @@ obj = {
     "4": "La Réunion",
     "6": "Mayotte",
     "11": "Île-de-France",
-    "24": "Centre-Val de Loire",
+    "24": "Centre-Val-de-Loire",
     "27": "Bourgogne-Franche-Comté",
     "28": "Normandie",
     "32": "Hauts-de-France",
