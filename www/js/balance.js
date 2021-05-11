@@ -169,7 +169,7 @@ var region = 11;
 var csvData = [];
 var vaccin = 'astrazeneca'
 var note = ''
-var warning = '<b>Avertissements:</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut dratisquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline';
+var warning = '<b>Avertissements :</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut drastiquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline.';
 var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a><br/> <a href="#" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
@@ -207,9 +207,6 @@ function updateBalance() {
    }
 
    $("#warning").html(warning+article_link);
-   if(vaccin == 'arn'){
-    note += note_arn;
-   }
    $("#note").html(note);
 }
 
@@ -239,8 +236,8 @@ var option = {
         pointer: {
             icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
             length: '12%',
-            width: 20,
-            offsetCenter: [0, '-60%'],
+            width: 25,
+            offsetCenter: [0, '-55%'],
             itemStyle: {
                 color: 'auto'
             }
@@ -258,8 +255,8 @@ var option = {
         axisLabel: {
             align: 'center',
             color: '#464646',
-            fontSize: 16,
-            distance: -95,
+            fontSize: 14,
+            distance: -85,
             formatter: function (value) {
                 if (value === 0.5) {
                     return 'balance\nnégative';
@@ -274,7 +271,7 @@ var option = {
         },
         title: {
             offsetCenter: [0, '-5%'],
-            fontSize: 26
+            fontSize: 20
         },
         detail: {
             fontSize: 50,
@@ -288,7 +285,7 @@ var option = {
         },
         data: [{
             value: 0.70,
-            name: 'Risque / Bénéfice'
+            name: 'Risque / \nBénéfice'
         }]
     }]
 };
