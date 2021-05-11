@@ -154,7 +154,7 @@ var region = 11;
 var csvData = [];
 var vaccin = 'astrazeneca'
 var note = ''
-var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés. ';
+var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.';
 var note_arn = '<br/><b>Note:</b> pour une personne sans aucun antécédent connu d’allergie et qui se fait vacciner dans un centre muni d’auto-injecteurs d’adrénaline, le risque peut drastiquement diminuer.';
 
 function updateBalance() {
@@ -185,11 +185,11 @@ function updateBalance() {
    var value = option.series[0].data[0].value;
 
    if(value<=1){
-    note = 'Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois';
+    note = 'Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }else if(value <=2){
-    note = 'Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois ';
+    note = 'Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }else{
-    note = 'Les risques graves liés aux deux injections du vaccin sont inférieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois';
+    note = 'Les risques graves liés aux deux injections du vaccin sont inférieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }
    note += warning
    if(vaccin == 'arn'){
