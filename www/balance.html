@@ -15,7 +15,8 @@
 <body>
 <!-- Prepare a DOM for Echarts, with a fixed size. -->
 <div class="container">
-    <form action="" class="m-auto" style="max-width:600px">
+
+    <form action="" class="m-auto" style="max-width:800px">
         <hr class="my-4"/>
         <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Sexe :</label>
             <div class="col-md-7">
@@ -46,20 +47,20 @@
                 <select class="form-select custom-select custom-select-lg" id="region"></select>
             </div>
         </div>
-          <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Boost d'incidence :</label>
+          <div class="form-group mb-3 row"><label class="col-md-5 col-form-label">Niveau d'exposition individuelle (voir article) :</label>
             <div class="col-md-7">
                 <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input"
                                                                            type="radio" name="boost" id="boost_1"
                                                                            value="high"><label
-                        class="form-check-label custom-control-label" for="boost_1">exposition forte</label></div>
+                        class="form-check-label custom-control-label" for="boost_1">fort</label></div>
                 <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input"
                                                                            type="radio" name="boost" id="boost_2" checked
                                                                            value="medium"><label
-                        class="form-check-label custom-control-label" for="boost_2">exposition moyenne</label></div>
+                        class="form-check-label custom-control-label" for="boost_2">moyen</label></div>
                 <div class="form-check custom-control custom-radio"><input class="form-check-input custom-control-input"
                                                                            type="radio" name="boost" id="boost_3"
                                                                            value="low"><label
-                        class="form-check-label custom-control-label" for="boost_3">exposition faible</label></div>
+                        class="form-check-label custom-control-label" for="boost_3">faible</label></div>
             </div>
         </div>
         <div class="form-group mb-3 row" id="select_vaccin"><label for="vaccin" class="col-md-5 col-form-label">Type de vaccin
@@ -67,15 +68,20 @@
             <div class="col-md-7">
                 <select class="form-select custom-select custom-select-lg" id="vaccin">
                     <option value="astrazeneca">Astrazeneca</option>
-                    <option value="arn">Arn messager</option>
+                    <option value="arn">Pfizer/BioNTech et Moderna</option>
                 </select>
             </div>
         </div>
+
     </form>
 </div>
+<div class="m-auto" style="max-width:800px">
+    <hr class="my-4"/>
+    <div id="note" class="my-4"></div>
+</div>
 
+<div id="main" style="max-width:800px;height:500px;" class="container"></div>
 
-<div id="main" style="width: 800px;height:600px;" class="container"></div>
 
 <!-- Here we go, with our customized echarts file.  -->
 <!-- It is IMPORTANT to put this file here, instead of putting in the header.  -->

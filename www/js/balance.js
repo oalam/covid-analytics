@@ -58,7 +58,7 @@ $('#cl_age90').change(function(){
 // setup comorbidité
 html = "";
 obj = {
-    "Aucun": "1",
+    "Aucune": "1",
     "Obésité": "1.63",
     "Diabète": "1.64",
     "Insuffisance cardiaque": "1.44",
@@ -153,7 +153,9 @@ var commobibity = 1;
 var region = 11;
 var csvData = [];
 var vaccin = 'astrazeneca'
-
+var note = ''
+var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés. ';
+var note_arn = '<br/><b>Note:</b> pour une personne sans aucun antécédent connu d’allergie et qui se fait vacciner dans un centre muni d’auto-injecteurs d’adrénaline, le risque peut drastiquement diminuer.';
 
 function updateBalance() {
 
@@ -163,7 +165,6 @@ function updateBalance() {
         if( csvData[i][0] == region && csvData[i][1] == cl_age90 ){
             if(sexe == 'f'){
                 if(vaccin == 'astrazeneca'){
-                        console.log( 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] ) ;
                     option.series[0].data[0].value = 0.76 * incidence_boost[boost] * commobibity * csvData[i][3] / astrazeneca_risk[cl_age90];
                 }else{
                     option.series[0].data[0].value = 0.95 * incidence_boost[boost] * commobibity * csvData[i][3] / 0.4;
@@ -177,17 +178,29 @@ function updateBalance() {
                     option.series[0].data[0].value = 0.95 * incidence_boost[boost] *  commobibity * csvData[i][2] / 0.4;
                  }
             }
-            console.log(option.series[0].data[0].value);
             break;
         }
    }
+   myChart.setOption(option, true);
+   var value = option.series[0].data[0].value;
 
-
-    myChart.setOption(option, true);
+   if(value<=1){
+    note = 'Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois';
+   }else if(value <=2){
+    note = 'Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois ';
+   }else{
+    note = 'Les risques graves liés aux deux injections du vaccin sont inférieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois';
+   }
+   note += warning
+   if(vaccin == 'arn'){
+    note += note_arn;
+   }
+   $("#note").html(note);
 }
 
 // Initialize echart object, based on the prepared DOM.
-var myChart = echarts.init(document.getElementById('main'));
+var myChart = echarts.init(document.getElementById('main'),{width:'600px',height:'300px'});
+
 
 // Costumize the options and data of the chart.
 var option = {
@@ -202,9 +215,9 @@ var option = {
             lineStyle: {
                 width: 6,
                 color: [
-                    [0.25, '#FF6E76'],
-                    [0.50,  '#58D9F9'],
-                    [1,'#7CFFB2' ]
+                    [0.25, '#CB1500'],
+                    [0.50,  '#008df5'],
+                    [1,'#a4aa00' ]
                 ]
             }
         },
@@ -228,27 +241,25 @@ var option = {
             }
         },
         axisLabel: {
+            align: 'center',
             color: '#464646',
-            fontSize: 20,
-            distance: -60,
+            fontSize: 16,
+            distance: -95,
             formatter: function (value) {
-                if (value === 0.875) {
-                    return '优';
+                if (value === 0.5) {
+                    return 'balance\nnégative';
                 }
-                else if (value === 0.625) {
-                    return '中';
+                else if (value === 1.5) {
+                    return 'balance\nneutre';
                 }
-                else if (value === 0.375) {
-                    return '良';
-                }
-                else if (value === 0.125) {
-                    return '差';
+                else if (value === 3) {
+                    return 'balance\npositive';
                 }
             }
         },
         title: {
             offsetCenter: [0, '-20%'],
-            fontSize: 30
+            fontSize: 26
         },
         detail: {
             fontSize: 50,
@@ -258,7 +269,7 @@ var option = {
                 return value.toFixed(2);
             },
             color: 'auto',
-            show: true
+            show: false
         },
         data: [{
             value: 0.70,
@@ -267,7 +278,7 @@ var option = {
     }]
 };
 
-fetch("https://raw.githubusercontent.com/oalam/covid-analytics/main/data/balance_astrazeneca-2021-05-14.csv") // L'url du service REST
+fetch("https://raw.githubusercontent.com/oalam/covid-analytics/main/data/balance.csv") // L'url du service REST
     .then(response => response.text())
     .then(data => {
 
