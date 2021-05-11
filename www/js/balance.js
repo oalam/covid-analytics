@@ -156,7 +156,7 @@ var vaccin = 'astrazeneca'
 var note = ''
 var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.';
 var note_arn = '<br/><b>Note:</b> pour une personne sans aucun antécédent connu d’allergie et qui se fait vacciner dans un centre muni d’auto-injecteurs d’adrénaline, le risque peut drastiquement diminuer.';
-
+var article_link = '<br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
 
@@ -192,6 +192,7 @@ function updateBalance() {
     note = 'Les risques graves liés aux deux injections du vaccin sont inférieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }
    note += warning
+   note += article_link
    if(vaccin == 'arn'){
     note += note_arn;
    }
