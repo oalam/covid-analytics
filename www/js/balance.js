@@ -1,6 +1,6 @@
 // setup Région options
 html = "";
-obj = {
+obj_old = {
     "1": "Guadeloupe",
     "2": "Martinique",
     "3": "Guyane",
@@ -19,6 +19,21 @@ obj = {
     "84": "Auvergne-Rhône-Alpes",
     "93": "Provence-Alpes-Côte d'Azur",
     "94": "Corse"
+}
+
+obj = {
+    "11": "Île-de-France",
+    "24": "Centre-Val-de-Loire",
+    "27": "Bourgogne-Franche-Comté",
+    "28": "Normandie",
+    "32": "Hauts-de-France",
+    "44": "Grand Est",
+    "52": "Pays de la Loire",
+    "53": "Bretagne",
+    "75": "Nouvelle-Aquitaine",
+    "76": "Occitanie",
+    "84": "Auvergne-Rhône-Alpes",
+    "93": "Provence-Alpes-Côte d'Azur"
 }
 var i =0;
 for(var key in obj) {
@@ -154,9 +169,8 @@ var region = 11;
 var csvData = [];
 var vaccin = 'astrazeneca'
 var note = ''
-var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.';
-var note_arn = '<br/><b>Note:</b> pour une personne sans aucun antécédent connu d’allergie et qui se fait vacciner dans un centre muni d’auto-injecteurs d’adrénaline, le risque peut drastiquement diminuer.';
-var article_link = ' <a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a> / <a href="#" target="_blank">Voir notre méthodologie</a>'
+var warning = '<br/><b>Avertissements:</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut dratisquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline';
+var article_link = '<br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a> / <a href="#" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
 
@@ -185,11 +199,11 @@ function updateBalance() {
    var value = option.series[0].data[0].value;
 
    if(value<=1){
-    note = 'Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
+    note = '<b>Résultat :</b> Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }else if(value <=2){
-    note = 'Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
+    note = '<b>Résultat :</b> Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
    }else{
-    note = 'Les risques graves liés aux deux injections du vaccin sont inférieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
+    note = '<b>Résultat :</b> Le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est plus de deux fois supérieur aux risques graves liés aux injections du vaccin.';
    }
    note += warning
    note += article_link
