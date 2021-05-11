@@ -156,7 +156,7 @@ var vaccin = 'astrazeneca'
 var note = ''
 var warning = '<br/><b>Avertissement:</b> Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.';
 var note_arn = '<br/><b>Note:</b> pour une personne sans aucun antécédent connu d’allergie et qui se fait vacciner dans un centre muni d’auto-injecteurs d’adrénaline, le risque peut drastiquement diminuer.';
-var article_link = '<br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir notre méthodologie</a>'
+var article_link = ' <a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a> / <a href="#" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
 
@@ -217,8 +217,8 @@ var option = {
                 width: 6,
                 color: [
                     [0.25, '#CB1500'],
-                    [0.50,  '#008df5'],
-                    [1,'#a4aa00' ]
+                    [0.50,  '#067F9D'],
+                    [1,'#008537' ]
                 ]
             }
         },
