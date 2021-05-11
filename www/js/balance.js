@@ -170,7 +170,7 @@ var csvData = [];
 var vaccin = 'astrazeneca'
 var note = ''
 var warning = '<b>Avertissements:</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut dratisquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline';
-var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a> / <a href="#" target="_blank">Voir notre méthodologie</a>'
+var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a><br/> <a href="#" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
 
@@ -221,8 +221,8 @@ var myChart = echarts.init(document.getElementById('main'),{width:'600px',height
 var option = {
     series: [{
         type: 'gauge',
-        startAngle: 180,
-        endAngle: 0,
+        startAngle: 210,
+        endAngle: -30,
         min: 0,
         max: 4,
         splitNumber: 8,
@@ -273,7 +273,7 @@ var option = {
             }
         },
         title: {
-            offsetCenter: [0, '-20%'],
+            offsetCenter: [0, '-5%'],
             fontSize: 26
         },
         detail: {
