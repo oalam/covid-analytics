@@ -169,7 +169,7 @@ var region = 11;
 var csvData = [];
 var vaccin = 'astrazeneca'
 var note = ''
-var warning = '<b>Avertissements :</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut drastiquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline.';
+var warning = '<b>Avertissements</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut drastiquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline.';
 var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a><br/> <a href="#" target="_blank">Voir notre méthodologie</a>'
 function updateBalance() {
 
@@ -199,11 +199,11 @@ function updateBalance() {
    var value = option.series[0].data[0].value;
 
    if(value<=1){
-    note = '<b>RESULTAT : Les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.</b>';
+    note = '<b>Résultat : les risques graves liés aux deux injections du vaccin sont supérieurs au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.</b>';
    }else if(value <=2){
-    note = '<b>RESULTAT : Les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.</b>';
+    note = '<b>Résultat : les risques graves liés aux deux injections du vaccin sont de même ordre de grandeur que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.</b>';
    }else{
-    note = '<b>RESULTAT : Le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est plus de deux fois supérieur aux risques graves liés aux injections du vaccin.</b>';
+    note = '<b>Résultat : le nombre d\’admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est plus de deux fois supérieur aux risques graves liés aux injections du vaccin.</b>';
    }
 
    $("#warning").html(warning+article_link);
