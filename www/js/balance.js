@@ -199,11 +199,11 @@ function updateBalance() {
    var value = option.series[0].data[0].value;
 
    if(value<=1){
-    note = '<b>Résultat :</b> les risques graves liés aux deux injections du vaccin sont <b>supérieurs</b> au nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
+    note = '<b>Résultat :</b> le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>inférieur</b> aux risques graves liés aux injections du vaccin.';    
    }else if(value <=2){
-    note = '<b>Résultat :</b> les risques graves liés aux deux injections du vaccin sont <b>du même ordre de grandeur</b> que le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois.';
+    note = '<b>Résultat :</b> le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>du même ordre de grandeur</b> que les risques graves liés aux injections du vaccin.';
    }else{
-    note = '<b>Résultat :</b> le nombre d\’admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>plus de deux fois supérieur</b> aux risques graves liés aux injections du vaccin.';
+    note = '<b>Résultat :</b> le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>plus de deux fois supérieur</b> aux risques graves liés aux injections du vaccin.';
    }
 
    $("#warning").html(warning+article_link);
