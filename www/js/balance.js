@@ -171,6 +171,9 @@ var vaccin = 'astrazeneca'
 var note = ''
 var warning = '<b>Avertissements</b><br/>Du côté des bénéfices, seules les admissions en réanimation évitées par la vaccination sont prises en compte. Les autres bénéfices, en particulier les cas de Covid long évités ou la protection de proches vulnérables, n\'ont pas été intégrés.<br/><br/>Du côté des risques, nous avons également pris en compte les cas d\'accidents allergiques graves. Toutefois, ce risque peut drastiquement diminuer pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline.';
 var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/" target="_blank">Voir le code source</a><br/> <a href="https://www.mediapart.fr/journal/france/120521/vaccins-covid-calculez-votre-balance-benefice-risque-personnelle" target="_blank">Voir notre méthodologie</a>'
+
+var warning_arn_neg = '<br/><b>Attention: </b>les risques représentent ici les cas d\'accidents allergiques graves. Nous révisons actuellement nos calculs pour pondérer ce risque en fonction des antécédents allergiques. Pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline, le risque est inférieur à celui indiqué ici.'
+
 function updateBalance() {
 
 
@@ -200,6 +203,8 @@ function updateBalance() {
 
    if(value<=1){
     note = '<b>Résultat :</b> le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>inférieur</b> aux risques graves liés aux injections du vaccin.';    
+    if(vaccin=='arn')
+        note += warning_arn_neg;
    }else if(value <=2){
     note = '<b>Résultat :</b> le nombre d\'admissions en réanimation que cette vaccination permet d\'éviter durant quatre mois est <b>du même ordre de grandeur</b> que les risques graves liés aux injections du vaccin.';
    }else{
