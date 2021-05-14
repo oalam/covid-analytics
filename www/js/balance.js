@@ -41,10 +41,8 @@ for(var key in obj) {
 }
 document.getElementById("region").innerHTML = html;
 $("#select_region select").val("11");
-$('#region').change(function(){
-    region = $(this).val();
-    updateBalance()
-})
+
+$('input, select').change(updateBalance);
 
 
 // setup cl age
@@ -64,10 +62,6 @@ for(var key in obj) {
 }
 document.getElementById("cl_age90").innerHTML = html;
 $("#select_cl_age90 select").val("49");
-$('#cl_age90').change(function(){
-    cl_age90 = $(this).val();
-    updateBalance()
-})
 
 
 // setup comorbidité
@@ -107,31 +101,7 @@ for(var key in obj) {
 }
 document.getElementById("commobibity").innerHTML = html;
 
-$('#commobibity').change(function(){
-    commobibity = $(this).val()
-    updateBalance()
-})
-
-
 $("#sexe select").val("f");
-$('input[name=sexe]').change(function(){
-    var value = $( 'input[name=sexe]:checked' ).val();
-    sexe = value;
-    updateBalance()
-});
-
-$('input[name=boost]').change(function(){
-    var value = $( 'input[name=boost]:checked' ).val();
-    boost = value;
-    updateBalance()
-});
-
-$('#vaccin').change(function(){
-    var value = $(this).val()
-    vaccin = value;
-    updateBalance()
-});
-
 
 var astrazeneca_risk = {
     29: 5.8,
@@ -175,6 +145,30 @@ var article_link = '<br/><br/><a href="https://github.com/oalam/covid-analytics/
 var warning_arn_neg = '<br/><b>Attention: </b>les risques représentent ici les cas d\'accidents allergiques graves. Nous révisons actuellement nos calculs pour pondérer ce risque en fonction des antécédents allergiques. Pour une personne sans aucun antécédent connu d\'allergie et qui se fait vacciner dans un centre muni d\'auto-injecteurs d\'adrénaline, le risque est inférieur à celui indiqué ici.'
 
 function updateBalance() {
+    var formData = $('form').serializeArray();
+    for(var d in formData){
+        switch(formData[d].name){
+            case "sexe":
+                sexe = formData[d].value;
+                break;
+            case "vaccin":
+                vaccin = formData[d].value;
+                break;
+            case "commobibity":
+                commobibity = formData[d].value;
+                break;
+            case "boost":
+                boost = formData[d].value;
+                break;
+            case "region":
+                region = formData[d].value;
+                break;
+            case "cl_age90":
+                cl_age90 = formData[d].value;
+                break;
+        }
+    }
+    console.log(formData);
 
 
    for (let i = 1; i < csvData.length; i++) {
